@@ -1,0 +1,14 @@
+
+# Compiled files
+*.class
+
+# App Egine SDK jars
+appengine-*.jar
+datanucleus-*.jar
+geronimo-*.jar
+jdo2-*.jar
+jsr*cache-*.jar
+
+#App Engine Generated
+datastore-indexes-auto.xml
+
