@@ -25,6 +25,11 @@ public class Classmates {
 
 
 		StringWriter json = new StringWriter();
+		String lastName;
+		String firstName;
+		String middleName;
+		String suffix;
+		String maidenName;
 		String name;
 
 		try
@@ -42,16 +47,41 @@ public class Classmates {
 			// Array of people
 			g.writeArrayFieldStart("aaData");
 
-			String [] nextLine;
+			String [] nextLine = reader.readNext();
 			while ((nextLine = reader.readNext()) != null) {
-				// // nextLine[] is an array of values from the line
-				// System.out.println(nextLine[0] + nextLine[1] + "etc...");
+				// nextLine[] is an array of values from the line
 
-				name = nextLine[0];
+				lastName = nextLine[0];
+				firstName = "";
+				middleName = "";
+				suffix = "";
+				maidenName = "";
 				if (nextLine.length > 1)
 				{
-					name = name + ", " + nextLine[1];
+					firstName = nextLine[1];
 				}
+				if (nextLine.length > 2)
+				{
+					middleName = nextLine[2];
+				}
+				if (nextLine.length > 3)
+				{
+					suffix = nextLine[3];
+				}
+				if (nextLine.length > 4)
+				{
+					maidenName = nextLine[4];
+				}
+				if (suffix.length() > 0)
+				{
+					lastName = lastName + " " + suffix;
+				}
+				if (maidenName.length() > 0)
+				{
+					firstName = firstName + " (" + lastName + ")";
+					lastName = maidenName;
+				}
+				name = lastName + ", " + firstName;
 
 				// Person
 				g.writeStartArray();

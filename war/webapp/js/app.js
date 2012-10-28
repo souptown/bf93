@@ -104,6 +104,7 @@ define(
 		MostWantedView = Backbone.View.extend({
 			actionKey: "mostwanted", // Default
 			template: null,
+			initialized: false,
 			initialize: function() {
 				// Load template
 				this.template = Handlebars.compile($("#mostWantedTemplate").html());
@@ -114,16 +115,22 @@ define(
 				var currentActions = this.model.get("currentActions");
 				if (currentActions === this.actionKey)
 				{
-					// Load the compiled HTML into the Backbone "el"
-					this.$el.html( this.template({}) );
+					if (!this.initialized)
+					{
+						// Load the compiled HTML into the Backbone "el"
+						this.$el.html( this.template({}) );
 
-					// Turn the html table into a jquery datatable
-					$('#mostWantedTable').dataTable({
-						"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-						"sPaginationType": "bootstrap",
-						"bProcessing": true,
-						"sAjaxSource": '../classmates/mostwanted'
-					});
+						// Turn the html table into a jquery datatable
+						$('#mostWantedTable').dataTable({
+							"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+							"sPaginationType": "full_numbers",
+							//"sPaginationType": "bootstrap",
+							"bProcessing": true,
+							"sAjaxSource": '../classmates/mostwanted',
+							iDisplayLength: 100
+						});
+						this.initialized = true;
+					}
 
 					// Show the view
 					this.$el.css("display", "");
