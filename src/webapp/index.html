@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="utf-8">
 	<title>SSHS '93</title>
-	<link rel="icon" type="image/png" href="images/spartan.ico" />
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css">
-    <link href="css/app.less" rel="stylesheet/less" type="text/css">
-    <!-- This less javascript is required here in HEAD to function properly -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="images/spartan.ico" />
+	<!-- Bootstrap CSS -->
+	<link href="css/cerulean.bootstrap.css" rel="stylesheet" type="text/css">
+	<!-- DataTables CSS -->
+	<link href="3rdparty/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" >
+	<style>
+	  body {
+		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+	  }
+	</style>
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link href="css/app.less" rel="stylesheet/less" type="text/css">
+	<!-- This less javascript is required here in HEAD to function properly -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.0/less-1.3.0.min.js"></script>
 </head>
 <body>
+
+	<div id="navigationBar" class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="navbar-inner">
+		<div class="container">
+		  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </a>
+		  <a class="brand" href="#">SSHS '93</a>
+		  <div class="nav-collapse collapse">
+			<ul class="nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#mostwanted">93's Most Wanted</a></li>
+			  <li><a href="#contact">Contact</a></li>
+			</ul>
+		  </div><!--/.nav-collapse -->
+		</div>
+	  </div>
+	</div>
+
+	<div class="container"><img src="images/93students.jpg" border="0"/></div>
+
+	<div id="welcomeContainer" class="container">Welcome</div>
+	<div id="mostWantedContainer" class="container">Most wanted</div>
+
 	<!-- The require.js library loads the javascript file specified its data-main attribute -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js" data-main="js/configAndLoad"></script>
+
+	<!-- Welcome template -->
+	<script id="welcomeTemplate" type="text/x-handlebars-template">
+		<h1>Welcome</h1>
+		<p>woo!</p>
+	</script>
+
+	<!-- Most wanted template -->
+	<script id="mostWantedTemplate" type="text/x-handlebars-template">
+		<h1>We need your help!</h1>
+		<p>Lorem ipsum help find folks etc.</p>
+		<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="mostWantedTable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>John Doe</td>
+					<td>Submit contct info</td>
+				</tr>
+				<tr>
+					<td>Jane Doe</td>
+					<td>Submit contact info</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</script>
+
 </body>
 </html>
