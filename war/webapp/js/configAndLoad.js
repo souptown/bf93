@@ -1,3 +1,14 @@
+/**
+ * The following comment prevents JSLint errors concerning undefined global variables.
+ * It tells JSLint that these identifiers are defined elsewhere.
+ */
+/*jslint bitwise:true, browser:true, nomen:true, regexp:true, sloppy:true, white:true */
+
+/** The following comment is to prevent jslint errors about 
+ * using variables before they are defined.
+ */
+/*global define, require */
+
 require.config(
   {
     //baseUrl: "/another/path",

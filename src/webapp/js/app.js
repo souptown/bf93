@@ -1,3 +1,14 @@
+/**
+ * The following comment prevents JSLint errors concerning undefined global variables.
+ * It tells JSLint that these identifiers are defined elsewhere.
+ */
+/*jslint bitwise:true, browser:true, nomen:true, regexp:true, sloppy:true, white:true */
+
+/** The following comment is to prevent jslint errors about 
+ * using variables before they are defined.
+ */
+/*global define, require */
+
 define(
 	// Dependencies
 	[
@@ -87,7 +98,7 @@ define(
 		}),
 
 		// Instance of WelcomeView class for handling the welcome view
-		welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel })
+		welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel }),
 
 		// Defines a class that handles the most wanted view
 		MostWantedView = Backbone.View.extend({
@@ -109,7 +120,9 @@ define(
 					// Turn the html table into a jquery datatable
 					$('#mostWantedTable').dataTable({
 						"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-						"sPaginationType": "bootstrap"
+						"sPaginationType": "bootstrap",
+						"bProcessing": true,
+						"sAjaxSource": '../classmates/mostwanted'
 					});
 
 					// Show the view
