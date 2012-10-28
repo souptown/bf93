@@ -6,7 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="images/spartan.ico" />
 	<!-- Bootstrap CSS -->
-	<link href="css/cerulean.bootstrap.css" rel="stylesheet" type="text/css">
+	<!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet"> -->
+	<!-- <link href="//netdna.bootstrapcdn.com/bootswatch/2.1.0/cerulean/bootstrap.min.css" rel="stylesheet"> -->
+	<link href="css/cerulean.bootstrap.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<!-- DataTables CSS -->
 	<link href="3rdparty/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" >
 	<style>
@@ -45,8 +48,6 @@
 	  </div>
 	</div>
 
-	<div class="container"><img src="images/93students.jpg" border="0"/></div>
-
 	<div id="welcomeContainer" class="container">Welcome</div>
 	<div id="mostWantedContainer" class="container">Most wanted</div>
 
@@ -55,32 +56,37 @@
 
 	<!-- Welcome template -->
 	<script id="welcomeTemplate" type="text/x-handlebars-template">
-		<h1>Welcome</h1>
-		<p>woo!</p>
+		<div align="center" id="studentsImg"><img src="images/93students.jpg" border="0"/></div>
+		<div class="content">
+			<h1>Welcome</h1>
+			<p>woo!</p>
+		</div>
 	</script>
 
 	<!-- Most wanted template -->
 	<script id="mostWantedTemplate" type="text/x-handlebars-template">
-		<h1>We need your help!</h1>
-		<p>Lorem ipsum help find folks etc.</p>
-		<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="mostWantedTable">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>John Doe</td>
-					<td>Submit contct info</td>
-				</tr>
-				<tr>
-					<td>Jane Doe</td>
-					<td>Submit contact info</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="content">
+			<h1>We need your help!</h1>
+			<p>Lorem ipsum help find folks etc.</p>
+			<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="mostWantedTable">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>John Doe</td>
+						<td>Submit contct info</td>
+					</tr>
+					<tr>
+						<td>Jane Doe</td>
+						<td>Submit contact info</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		
 	</script>
 
