@@ -13,13 +13,13 @@
 	<!-- DataTables CSS -->
 	<link href="3rdparty/jquery.dataTables/1.9.4/css/jquery.dataTables.css" rel="stylesheet" type="text/css" >
 	<style>
-	  body {
+		body {
 		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	  }
+		}
 	</style>
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
-	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
 	<link href="css/app.less" rel="stylesheet/less" type="text/css">
@@ -29,23 +29,25 @@
 <body>
 
 	<div id="navigationBar" class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="navbar-inner">
+		<div class="navbar-inner">
 		<div class="container">
-		  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
-		  </a>
-		  <a class="brand" href="#">SSHS '93</a>
-		  <div class="nav-collapse collapse">
+			</a>
+			<a class="brand" href="#">SSHS '93</a>
+			<div class="nav-collapse collapse">
 			<ul class="nav">
-			  <li class="active"><a href="#">Home</a></li>
-			  <li><a href="#mostwanted">93's Most Wanted</a></li>
-			  <li><a href="#contact">Contact</a></li>
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#reunion">Reunion</a></li>
+				<li><a href="#mostwanted">93's Most Wanted</a></li>
+				<li><a href="#pics">Gallery</a></li>
+				<li><a href="#contact">Contact</a></li>
 			</ul>
-		  </div><!--/.nav-collapse -->
+			</div><!--/.nav-collapse -->
 		</div>
-	  </div>
+		</div>
 	</div>
 
 	<div id="welcomeContainer" class="container">Welcome</div>
@@ -57,34 +59,63 @@
 	<!-- Welcome template -->
 	<script id="welcomeTemplate" type="text/x-handlebars-template">
 		<div align="center" id="studentsImg"><img src="images/93students.jpg" border="0"/></div>
-		<div class="content">
-			<h1>Welcome</h1>
-			<p>woo!</p>
+		<div class="hero-unit">
+			<h1>Superior Senior High class of 1993</h1>
+			<p>Reunion planning, etc.</p>
 		</div>
+
+		<!-- Example row of columns -->
+		<div class="row">
+		<div class="span4">
+			<h2>Reunion Planning</h2>
+			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			<p><a class="btn" href="#reunion">View details &raquo;</a></p>
+		</div>
+		<div class="span4">
+			<h2>Classmate contact info</h2>
+			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			<p><a class="btn" href="#mostwanted">View details &raquo;</a></p>
+		 </div>
+		<div class="span4">
+			<h2>Pictures</h2>
+			<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+			<p><a class="btn" href="#pics">View details &raquo;</a></p>
+		</div>
+		</div>
+
+		<hr>
+
+		<footer>
+		<p>&copy; Class of 1993</p>
+		</footer>
+
 	</script>
 
 	<!-- Most wanted template -->
 	<script id="mostWantedTemplate" type="text/x-handlebars-template">
-		<div class="content">
+		<div class="span12">
 			<h1>We need your help!</h1>
 			<p>Lorem ipsum help find folks etc.</p>
-			<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="mostWantedTable">
-				<thead>
-					<tr>
-						<th>Name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>John Doe</td>
-					</tr>
-					<tr>
-						<td>Jane Doe</td>
-					</tr>
-				</tbody>
-			</table>
+
+			<div class="span6">
+				<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="mostWantedTable">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John Doe</td>
+						</tr>
+						<tr>
+							<td>Jane Doe</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		
+
 	</script>
 
 </body>

@@ -122,12 +122,12 @@ define(
 
 						// Turn the html table into a jquery datatable
 						$('#mostWantedTable').dataTable({
-							"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+							"sDom": "<'row'<'span3'l><'span3'f>r>t<'row'<'span3'i><'span3'p>>",
 							//"sPaginationType": "full_numbers",
 							"sPaginationType": "bootstrap",
 							"bProcessing": true,
 							"sAjaxSource": '../classmates/mostwanted',
-							iDisplayLength: 100
+							iDisplayLength: 500
 						});
 						this.initialized = true;
 					}
