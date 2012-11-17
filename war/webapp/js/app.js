@@ -34,7 +34,10 @@ define(
 		// Used by each view to determine whether to show itself or not
 		viewModel = new (Backbone.Model.extend({})),
 
-		// Called when instantiated
+		/**
+		 * Called once the class has been instantiated
+		 * @return {undefined}
+		 */
 		initialize = function () {
 
 			// Set bootstrap sort classes for jquery datatables
@@ -51,7 +54,10 @@ define(
 			
 		},
 
-		// Defines a class that handles the nav bar view
+		/**
+		 * Defines a class that handles the nav bar view
+		 * @type {Backbone.View}
+		 */
 		NavigationView = Backbone.View.extend({
 			initialize: function () {
 				this.model.on("change:currentActions", this.render, this);
@@ -66,10 +72,31 @@ define(
 			}
 		}),
 
-		// Instance of NavigationView class for handling the nav bar view
+		/**
+		 * Instance of NavigationView class for handling the nav bar view
+		 * @type {NavigationView}
+		 */
 		navigationView = new NavigationView({ model: viewModel }),
 
-		// Defines a class that handles the welcome view
+		PageLoadingView = Backbone.View.extend({
+			initialize: function () {
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function () {
+				$("#pageLoading").css("display", "none");
+			}
+		}),
+
+		/**
+		 * Instance of NavigationView class for handling the page loading view
+		 * @type {PageLoadingView}
+		 */
+		pageLoadingView = new PageLoadingView({ model: viewModel }),
+
+		/**
+		 * Defines a class that handles the welcome view
+		 * @type {Backbone.View}
+		 */
 		WelcomeView = Backbone.View.extend({
 			actionKey: "", // Default
 			template: null,
@@ -97,17 +124,97 @@ define(
 			}
 		}),
 
-		// Instance of WelcomeView class for handling the welcome view
+		/**
+		 * Instance of WelcomeView class for handling the welcome view
+		 * @type {WelcomeView}
+		 */
 		welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel }),
 
-		// Defines a class that handles the most wanted view
-		MostWantedView = Backbone.View.extend({
-			actionKey: "mostwanted", // Default
+		/**
+		 * Defines a class that handles the Registration view
+		 * @type {Backbone.View}
+		 */
+		RegistrationView = Backbone.View.extend({
+			actionKey: "registration",
+			template: null,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#registrationTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of RegistrationView class for handling the welcome view
+		 * @type {RegistrationView}
+		 */
+		registrationView = new RegistrationView({ el: $("#registrationContainer"), model: viewModel }),
+
+		/**
+		 * Defines a class that handles the Registered Attendees view
+		 * @type {Backbone.View}
+		 */
+		RegisteredView = Backbone.View.extend({
+			actionKey: "registered",
+			template: null,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#registeredTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of RegistrationView class for handling the welcome view
+		 * @type {RegistrationView}
+		 */
+		registeredView = new RegisteredView({ el: $("#registeredContainer"), model: viewModel }),
+
+		/**
+		 * Defines a class that handles the missing classmates view
+		 * @type {Backbone.View}
+		 */
+		ClassmatesView = Backbone.View.extend({
+			actionKey: "classmates", // Default
 			template: null,
 			initialized: false,
 			initialize: function() {
 				// Load template
-				this.template = Handlebars.compile($("#mostWantedTemplate").html());
+				this.template = Handlebars.compile($("#classmatesTemplate").html());
 				// Listen for model changes
 				this.model.on("change:currentActions", this.render, this);
 			},
@@ -120,15 +227,20 @@ define(
 						// Load the compiled HTML into the Backbone "el"
 						this.$el.html( this.template({}) );
 
-						// Turn the html table into a jquery datatable
-						$('#mostWantedTable').dataTable({
-							"sDom": "<'row'<'span3'l><'span3'f>r>t<'row'<'span3'i><'span3'p>>",
-							//"sPaginationType": "full_numbers",
-							"sPaginationType": "bootstrap",
-							"bProcessing": true,
-							"sAjaxSource": '../classmates/mostwanted',
-							iDisplayLength: 500
-						});
+						// // Turn the html table into a jquery datatable
+						// $('#classmatesTable').dataTable({
+						// 	"sDom": "<'row'<'span4'l><'span4'f>r>t<'row'<'span4'i><'span4'p>>",
+						// 	//"sPaginationType": "full_numbers",
+						// 	"sPaginationType": "bootstrap",
+						// 	"bProcessing": true,
+						// 	"sAjaxSource": '../api/classmates',
+						// 	iDisplayLength: 100,
+						// 	sScrollY: 400,
+						// 	"aoColumns": [
+						// 		{ "sWidth": "80%" },
+						// 		{ "sWidth": "20%" }
+						//     ]
+						// });
 						this.initialized = true;
 					}
 
@@ -143,8 +255,97 @@ define(
 			}
 		}),
 
-		// Instance of MostWantedView class for handling the most wanted view
-		mostWantedView = new MostWantedView({ el: $("#mostWantedContainer"), model: viewModel });
+		/**
+		 * Instance of classmatesView class for handling the most wanted view
+		 * @type {ClassmatesView}
+		 */
+		classmatesView = new ClassmatesView({ el: $("#classmatesContainer"), model: viewModel }),
+
+		/**
+		 * Defines a class that handles the memories view
+		 * @type {Backbone.View}
+		 */
+		MemoriesView = Backbone.View.extend({
+			actionKey: "memories", // Default
+			template: null,
+			initialized: false,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#memoriesTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					if (!this.initialized)
+					{
+						// Load the compiled HTML into the Backbone "el"
+						this.$el.html( this.template({}) );
+
+						this.initialized = true;
+					}
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of memoriesView class for handling the most wanted view
+		 * @type {MemoriesView}
+		 */
+		memoriesView = new MemoriesView({ el: $("#memoriesContainer"), model: viewModel }),
+
+		/**
+		 * Defines a class that handles the contact view
+		 * @type {Backbone.View}
+		 */
+		ContactView = Backbone.View.extend({
+			actionKey: "contact", // Default
+			template: null,
+			initialized: false,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#contactTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					if (!this.initialized)
+					{
+						// Load the compiled HTML into the Backbone "el"
+						this.$el.html( this.template({}) );
+
+						this.initialized = true;
+					}
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of contactView class for handling the most wanted view
+		 * @type {ContactView}
+		 */
+		contactView = new ContactView({ el: $("#contactContainer"), model: viewModel });
 
 		return {
 			initialize: initialize

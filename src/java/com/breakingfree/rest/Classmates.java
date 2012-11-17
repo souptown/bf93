@@ -11,10 +11,9 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 //The Java class will be hosted at the URI path "/helloworld"
-@Path("/classmates")
+@Path("/api/classmates")
 public class Classmates {
 
-	@Path("/mostwanted")
 	// The Java method will process HTTP GET requests
 	@GET
 	// The Java method will produce content identified by the MIME Media
@@ -29,8 +28,9 @@ public class Classmates {
 		String firstName;
 		String middleName;
 		String suffix;
-		String maidenName;
+		String currentLastName;
 		String name;
+		String contactInfoStatus;
 
 		try
 		{
@@ -55,7 +55,8 @@ public class Classmates {
 				firstName = "";
 				middleName = "";
 				suffix = "";
-				maidenName = "";
+				currentLastName = "";
+				contactInfoStatus = "";
 				if (nextLine.length > 1)
 				{
 					firstName = nextLine[1];
@@ -70,22 +71,27 @@ public class Classmates {
 				}
 				if (nextLine.length > 4)
 				{
-					maidenName = nextLine[4];
+					currentLastName = nextLine[4];
+				}
+				if (nextLine.length > 5)
+				{
+					contactInfoStatus = nextLine[5];
 				}
 				if (suffix.length() > 0)
 				{
 					lastName = lastName + " " + suffix;
 				}
-				if (maidenName.length() > 0)
+				if (currentLastName.length() > 0)
 				{
 					firstName = firstName + " (" + lastName + ")";
-					lastName = maidenName;
+					lastName = currentLastName;
 				}
 				name = lastName + ", " + firstName;
 
 				// Person
 				g.writeStartArray();
 				g.writeString(name);
+				g.writeString(contactInfoStatus);
 				g.writeEndArray();
 			}
 			// Array of people

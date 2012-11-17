@@ -2,11 +2,33 @@
 body {
   padding-top: 60px;
 }
+.fullNameWelcome {
+  display: block;
+}
+.shortNameWelcome {
+  display: none;
+}
+.welcome-logo {
+  float: left;
+  margin-top: -30px;
+  margin-bottom: -30px;
+  margin-right: 20px;
+}
+
 @media (max-width: 979px) {
   body {
     padding-top: 0px;
   }
   #studentsImg {
+    display: none;
+  }
+  .fullNameWelcome {
+    display: none;
+  }
+  .shortNameWelcome {
+    display: block;
+  }
+  .welcome-logo {
     display: none;
   }
 }
