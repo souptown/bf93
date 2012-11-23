@@ -15,3 +15,11 @@ Redirect URIs: https://www.breakingfree93.com/oauth2callback http://localhost
 JavaScript origins: https://www.breakingfree93.com http://www.breakingfree93.com https://breakingfree93.com http://breakingfree93.com
 
 
+
+
+Paypal
+Credential		API Signature
+API Username	registration_api1.breakingfree93.com
+API Password	48D6UST4KNLXQRUX
+Signature		AFcWxV21C7fd0v3bYYYRCpSSRl31Aj2.FfvKM625kFYVGTpODHBaUgQR
+Request Date	Nov 20, 2012 23:22:50 CST
