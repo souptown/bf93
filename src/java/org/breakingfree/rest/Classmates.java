@@ -1,4 +1,4 @@
-package com.breakingfree.rest;
+package org.breakingfree.rest;
 
 import java.io.*;
 import java.net.*;
