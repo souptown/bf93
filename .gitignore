@@ -12,3 +12,5 @@ jsr*cache-*.jar
 #App Engine Generated
 datastore-indexes-auto.xml
 
+notes.txt
+

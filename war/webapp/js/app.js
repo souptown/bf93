@@ -135,7 +135,13 @@ define(
 		 * @type {Backbone.View}
 		 */
 		RegistrationView = Backbone.View.extend({
-			actionKey: "registration",
+			actionKeys: {
+				"registration": true,
+				"paypalcancel": { "message": "<p>Registration payment was canceled. No payment has been made.</p>" },
+				"paypalsuccess": { "message": "<p>Thank you for registering! Your transaction has been completed, and a receipt for your purchase has been emailed to you. You may log into your account at <a href=\"http://www.paypal.com/us\" title=\"Paypal Website\" target=\"_blank\">http://www.paypal.com/us</a> to view details of this transaction. We will add your name to the list of Registered Attendees the next time we update it if you chose to allow that.</p>" +
+					"<p><strong>IF YOU DID NOT GIVE US YOUR NAME</strong>, then you will need to provide proof of payment when you come to the reunion. A print-out of your Paypal confirmation email will work for this.</p>" +
+					"<p>Can't wait to see you!</p>" }
+			},
 			template: null,
 			initialize: function() {
 				// Load template
@@ -145,10 +151,16 @@ define(
 			},
 			render: function() {
 				var currentActions = this.model.get("currentActions");
-				if (currentActions === this.actionKey)
+				if (typeof(this.actionKeys[currentActions]) !== "undefined")
 				{
 					// Load the compiled HTML into the Backbone "el"
 					this.$el.html( this.template({}) );
+
+					if (currentActions === "paypalcancel" || currentActions === "paypalsuccess")
+					{
+						this.$el.find(".paypalMessageContainer").css("display", "block");
+						this.$el.find(".paypalMessage").html(this.actionKeys[currentActions].message);
+					}
 
 					// Show the view
 					this.$el.css("display", "");
