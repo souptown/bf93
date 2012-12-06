@@ -186,14 +186,20 @@ define(
 		RegisteredView = Backbone.View.extend({
 			actionKey: "registered",
 			template: null,
+			attendeeTemplate: null,
+			totalsTemplate: null,
 			initialize: function() {
-				// Load template
+				// Load templates
 				this.template = Handlebars.compile($("#registeredTemplate").html());
+				this.attendeeTemplate = Handlebars.compile($("#registeredAttendeesTemplate").html());
+				this.totalsTemplate = Handlebars.compile($("#registeredTotalsTemplate").html());
 				// Listen for model changes
 				this.model.on("change:currentActions", this.render, this);
 			},
 			render: function() {
-				var currentActions = this.model.get("currentActions");
+				var currentActions = this.model.get("currentActions"),
+					view = this;
+
 				if (currentActions === this.actionKey)
 				{
 					// Load the compiled HTML into the Backbone "el"
@@ -201,12 +207,40 @@ define(
 
 					// Show the view
 					this.$el.css("display", "");
+
+					// Load the data
+					$.getJSON("../api/classmates/registered", null, function (data) {
+							var i, classmates = data.data.length, guests = 0;
+
+							// Count guests
+							$.each(data.data, function (index, value) {
+								if (view.isNumber(value.guests))
+								{
+									guests += parseInt(value.guests, 10);
+								}
+							});
+
+							// Sort data
+							data.data.sort(function (a, b) {
+								var aText = a.lastName.toLowerCase() + " " + (a.maidenName || "").toLowerCase() + " " + a.firstName.toLowerCase(),
+									btext = b.lastName.toLowerCase() + " " + (b.maidenName || "").toLowerCase() + " " + b.firstName.toLowerCase();
+								return ((aText < btext) ? -1 : ((aText > btext) ? 1 : 0));
+							});
+
+							view.$el.find(".total").html(view.totalsTemplate({ "total": guests + classmates, "classmates": classmates, "guests": guests } )).css("display", "");
+							view.$el.find(".list").html(view.attendeeTemplate(data)).css("display", "");
+							view.$el.find("img").css("display", "none");
+						}
+					);
 				}
 				else
 				{
 					// Hide the view
 					this.$el.css("display", "none");
 				}
+			},
+			isNumber: function (n) {
+				return !isNaN(parseFloat(n)) && isFinite(n);
 			}
 		}),
 
@@ -217,47 +251,39 @@ define(
 		registeredView = new RegisteredView({ el: $("#registeredContainer"), model: viewModel }),
 
 		/**
-		 * Defines a class that handles the missing classmates view
+		 * Defines a class that handles the missing missing view
 		 * @type {Backbone.View}
 		 */
-		ClassmatesView = Backbone.View.extend({
-			actionKey: "classmates", // Default
+		MissingView = Backbone.View.extend({
+			actionKey: "missing", // Default
 			template: null,
+			missingClassmateTemplate: null,
 			initialized: false,
 			initialize: function() {
 				// Load template
-				this.template = Handlebars.compile($("#classmatesTemplate").html());
+				this.template = Handlebars.compile($("#missingTemplate").html());
+				this.missingClassmateTemplate = Handlebars.compile($("#missingClassmateTemplate").html());
 				// Listen for model changes
 				this.model.on("change:currentActions", this.render, this);
 			},
 			render: function() {
-				var currentActions = this.model.get("currentActions");
+				var currentActions = this.model.get("currentActions"),
+					view = this;
+
 				if (currentActions === this.actionKey)
 				{
-					if (!this.initialized)
-					{
-						// Load the compiled HTML into the Backbone "el"
-						this.$el.html( this.template({}) );
-
-						// // Turn the html table into a jquery datatable
-						// $('#classmatesTable').dataTable({
-						// 	"sDom": "<'row'<'span4'l><'span4'f>r>t<'row'<'span4'i><'span4'p>>",
-						// 	//"sPaginationType": "full_numbers",
-						// 	"sPaginationType": "bootstrap",
-						// 	"bProcessing": true,
-						// 	"sAjaxSource": '../api/classmates',
-						// 	iDisplayLength: 100,
-						// 	sScrollY: 400,
-						// 	"aoColumns": [
-						// 		{ "sWidth": "80%" },
-						// 		{ "sWidth": "20%" }
-						//     ]
-						// });
-						this.initialized = true;
-					}
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
 
 					// Show the view
 					this.$el.css("display", "");
+
+					// Load the data
+					$.getJSON("../api/classmates/missing", null, function (data) {
+							view.$el.find(".list").html(view.missingClassmateTemplate(data)).css("display", "");
+							view.$el.find("img").css("display", "none");
+						}
+					);
 				}
 				else
 				{
@@ -268,10 +294,10 @@ define(
 		}),
 
 		/**
-		 * Instance of classmatesView class for handling the most wanted view
-		 * @type {ClassmatesView}
+		 * Instance of missingView class for handling the most wanted view
+		 * @type {MissingView}
 		 */
-		classmatesView = new ClassmatesView({ el: $("#classmatesContainer"), model: viewModel }),
+		missingView = new MissingView({ el: $("#missingContainer"), model: viewModel }),
 
 		/**
 		 * Defines a class that handles the memories view

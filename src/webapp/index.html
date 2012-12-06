@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -50,7 +49,7 @@
 					<li class="active"><a href="#">Home</a></li>
 					<li><a href="#registration">Registration</a></li>
 					<li><a href="#registered">Registered Attendees</a></li>
-					<li><a href="#classmates">Missing Classmates</a></li>
+					<li><a href="#missing">Missing Classmates</a></li>
 					<li><a href="#memories">Memories</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
@@ -63,7 +62,7 @@
 	<div id="welcomeContainer" class="container" style="display: none;">Welcome</div>
 	<div id="registrationContainer" class="container" style="display: none;">Registration</div>
 	<div id="registeredContainer" class="container" style="display: none;">Registered Attendees</div>
-	<div id="classmatesContainer" class="container" style="display: none;">Missing Classmates</div>
+	<div id="missingContainer" class="container" style="display: none;">Missing Classmates</div>
 	<div id="memoriesContainer" class="container" style="display: none;">Memories</div>
 	<div id="contactContainer" class="container" style="display: none;">Contact</div>
 	
@@ -103,7 +102,6 @@
 			<div style="clear:both;"></div>
 		</div>
 
-		<!-- Example row of columns -->
 		<div class="row">
 			<div class="span8">
 				<h2>Reunion</h2>
@@ -115,7 +113,9 @@
 				<h4>Saturday — Golf Tournament</h4>
 				<p>Nemadji Golf Course - Competitive and “Just for fun” brackets</p>
 				<h4>Saturday Night — Main Event</h4>
-				<p>Come relive the All Night Graduation Party at the beautiful new Yellowjacket Union on the UWS campus. Planned activities include Dinner, Dancing, Casino Night, Karaoke, a Hypnotist and reliving the “glory days”.</p>
+				<p>Come relive the All Night Graduation Party* at the beautiful new Yellowjacket Union on the UWS campus. Planned activities include Dinner, Dancing, Casino Night, Karaoke, a Hypnotist and reliving the “glory days”.</p>
+				<br/>
+				<p>* This will not be an all night event</p>
 			</div>
 			<div class="span4">
 				<h2>Venues</h2>
@@ -128,11 +128,6 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="span4">
-				<h2>Visit our Facebook page</h2>
-				<p>Check out the SSHS Class of 1993 Facebook group for discussions and news.</p>
-				<p><a class="btn" href="https://www.facebook.com/groups/397316073640135/?fref=ts">Let's go &raquo;</a></p>
-			</div>
 		</div>
 
 
@@ -142,31 +137,62 @@
 	<script id="registrationTemplate" type="text/x-handlebars-template">
 		<div class="span12">
 
-			<div class="row">
-				<div class="span8">
-					<h1>Registration</h1>
-					We're working on it!
-				</div>
-
-				<div class="span4">
-					<h2>Need a room?</h2>
-					<p>Hotels
-						<ul>
-							<li><a href="http://www.barkersislandinn.com" title="Barkers Island Inn">Barkers Island Inn</a></li>
-							<li><a href="http://www.hisuperior.com" title="Holiday Inn Express">Holiday Inn Express</a></li>
-						</ul>
-					</p>
+			<div class="row paypalMessageContainer">
+				<div class="span12">
+					<div class="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<div class="paypalMessage">paypal message</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="row">
+
 				<div class="span8">
+					<h1>Registration</h1>
+					<p>Registration fee:
+						<ul>
+							<li>$40 per person prior to March 1, 2013</li>
+							<li>$50 per person starting March 1, 2013</li>
+							<li>$60 per person at the door</li>
+					</p>
+
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="P9BM97JLR245L">
+					<table>
+					<tr><td><input type="hidden" name="on0" value="includeOnWebsite">May we include your name in the <a href="#registered">list of registered attendees</a>?</td></tr><tr><td><select name="os0">
+						<option value="Yes">Yes </option>
+						<option value="No">No </option>
+					</select> </td></tr>
+					<tr><td><input type="hidden" name="on1" value="attendee">Tell us your name for admittance to the Saturday evening reunion event. Include your name from high school if it is different than your current name. If you answered No above, we will respect your wish to not be included in the attendee list, but we will still need your name.</td></tr><tr><td><input type="text" name="os1" maxlength="200"></td></tr>
+					</table>
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="span6">
 					<h2>Planning a longer stay?</h2>
 					<ul>
 						<li><a href="http://www.superiorchamber.org" title="Superior-Douglas County Chamber of Commerce">Superior-Douglas County Chamber of Commerce</a></li>
 						<li><a href="http://www.twinportsnightlife.com" title="Twin Ports Night Life">Twin Ports Night Life</a></li>
 						<li><a href="http://visitduluth.com" title="Visit Duluth">Visit Duluth</a></li>
 					</ul>
+				</div>
+
+				<div class="span6">
+					<h2>Need a room?</h2>
+					<p>
+						<ul>
+							<li><a href="http://www.barkersislandinn.com" title="Barkers Island Inn">Barkers Island Inn</a></li>
+							<li><a href="http://www.hisuperior.com" title="Holiday Inn Express">Holiday Inn Express</a></li>
+						</ul>
+					</p>
 				</div>
 			</div>
 
@@ -179,42 +205,58 @@
 		<div class="span12">
 
 			<div class="row">
-				<div class="span8">
+				<div class="span12">
 					<h1>Registered Attendees</h1>
-					We're working on it!
+					<p style="display: none" class="total"></p>
+
+					<div class="span8">
+						<img src="images/ajax-loader.gif"/>
+						<ul class="list" style="display: none;">
+						</ul>
+					</div>
+
 				</div>
-
 			</div>
-
 		</div>
 
 	</script>
 
+	<!-- Registered Attendees template -->
+	<script id="registeredAttendeesTemplate" type="text/x-handlebars-template">
+		{{#each data}}
+		<li>{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}{{#if firstName}}, {{firstName}}{{/if}}</li>
+		{{/each}}
+	</script>
+
+	<!-- Registered total template -->
+	<script id="registeredTotalsTemplate" type="text/x-handlebars-template">
+		{{classmates}} classmates & {{guests}} guests ({{total}} total)
+	</script>
+
 	<!-- Missing classmates template -->
-	<script id="classmatesTemplate" type="text/x-handlebars-template">
+	<script id="missingTemplate" type="text/x-handlebars-template">
 		<div class="span12">
 			<div class="row">
 				<div class="span12">
 					<h1>Missing Classmates</h1>
-					<p>We're working on it!</p>
 
-					<!--div class="span8">
-						<table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="classmatesTable">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Contact information status</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div-->
+					<div class="span8">
+						<img src="images/ajax-loader.gif"/>
+						<ul class="list" style="display: none;">
+						</ul>
+					</div>
 
 				</div>
 			</div>
 		</div>
 
+	</script>
+
+	<!-- Registered Attendees template -->
+	<script id="missingClassmateTemplate" type="text/x-handlebars-template">
+		{{#each data}}
+		<li>{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}, {{firstName}}</li>
+		{{/each}}
 	</script>
 
 	<!-- Memories template -->
@@ -223,7 +265,7 @@
 			<div class="row">
 				<div class="span12">
 					<h1>Memories</h1>
-					<p>We're working on it!</p>
+					<p>Working on it!</p>
 
 				</div>
 			</div>
@@ -235,10 +277,15 @@
 	<script id="contactTemplate" type="text/x-handlebars-template">
 		<div class="span12">
 			<div class="row">
-				<div class="span12">
-					<h1>Contact the reunion committee</h1>
-					<p>We're working on it!</p>
-
+				<div class="span6">
+					<h1>Email</h1>
+					<p>Send an email to the reunion committee.</p>
+					<p><a class="btn" href="http://www.google.com/recaptcha/mailhide/d?k=01RJ5oJga0wozLa8T0RBIjcQ==&c=BTWUEjd-sGbwdI7x7B0e4oB-uCemNaBiRdLWw5t26oI=" title="Reunion committee email" target="_blank">Go &raquo;</a></p>
+				</div>
+				<div class="span6">
+					<h2>Visit our Facebook page</h2>
+					<p>Check out the SSHS Class of 1993 Facebook group for discussions and news.</p>
+					<p><a class="btn" href="https://www.facebook.com/groups/397316073640135/?fref=ts">Go &raquo;</a></p>
 				</div>
 			</div>
 		</div>

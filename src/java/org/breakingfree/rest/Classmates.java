@@ -5,6 +5,7 @@ import java.net.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVReader;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -14,96 +15,81 @@ import com.fasterxml.jackson.core.JsonGenerator;
 @Path("/api/classmates")
 public class Classmates {
 
-	// The Java method will process HTTP GET requests
+	private static String REGISTERED_CSV_URL = "https://docs.google.com/spreadsheet/pub?key=0AiXyCm-Csq4bdDZyTEp0Y1BLaGhSU0h2ZGpFLTFsVlE&single=true&gid=0&output=csv";
+	private static String MISSING_CLASSMATES_CSV_URL = "https://docs.google.com/spreadsheet/pub?key=0AiXyCm-Csq4bdDdsczBsaGRBVVZBTTlqWjVQZmNGcHc&single=true&gid=0&output=csv";
+
 	@GET
-	// The Java method will produce content identified by the MIME Media
-	// type "application/json"
 	@Produces("application/json")
-	// @Produces("text/html")
-	public String getMostWanted() {
+	@Path("/registered")
+	public String getRegistered() {
 
+		String json = getJsonFromCsvUrl(REGISTERED_CSV_URL);
+		return json;
+	}
 
-		StringWriter json = new StringWriter();
-		String lastName;
-		String firstName;
-		String middleName;
-		String suffix;
-		String currentLastName;
-		String name;
-		String contactInfoStatus;
+	@GET
+	@Produces("application/json")
+	@Path("/missing")
+	public String getMissing() {
+
+		String json = getJsonFromCsvUrl(MISSING_CLASSMATES_CSV_URL);
+		return json;
+	}
+
+	String getJsonFromCsvUrl(String url)
+	{
+		String json = null;
 
 		try
 		{
-			URL mostWantedUrl = new URL("https://docs.google.com/a/breakingfree93.com/spreadsheet/pub?key=0AorXvig1X1NfdHV6STZPcWhreU5fTTBaWUIxU1ZVRkE&single=true&gid=0&output=csv");
-			URLConnection connection = mostWantedUrl.openConnection();
-			// json.write(convertStreamToString(connection.getInputStream()));
-			// return json.toString();
+			URL urlObject = new URL(url);
+			URLConnection connection = urlObject.openConnection();
 			InputStreamReader in = new InputStreamReader(connection.getInputStream());
-			CSVReader reader = new CSVReader(in);
-			JsonGenerator g = (new JsonFactory()).createJsonGenerator(json);
-
-			// Wrapper object
-			g.writeStartObject();
-			// Array of people
-			g.writeArrayFieldStart("aaData");
-
-			String [] nextLine = reader.readNext();
-			while ((nextLine = reader.readNext()) != null) {
-				// nextLine[] is an array of values from the line
-
-				lastName = nextLine[0];
-				firstName = "";
-				middleName = "";
-				suffix = "";
-				currentLastName = "";
-				contactInfoStatus = "";
-				if (nextLine.length > 1)
-				{
-					firstName = nextLine[1];
-				}
-				if (nextLine.length > 2)
-				{
-					middleName = nextLine[2];
-				}
-				if (nextLine.length > 3)
-				{
-					suffix = nextLine[3];
-				}
-				if (nextLine.length > 4)
-				{
-					currentLastName = nextLine[4];
-				}
-				if (nextLine.length > 5)
-				{
-					contactInfoStatus = nextLine[5];
-				}
-				if (suffix.length() > 0)
-				{
-					lastName = lastName + " " + suffix;
-				}
-				if (currentLastName.length() > 0)
-				{
-					firstName = firstName + " (" + lastName + ")";
-					lastName = currentLastName;
-				}
-				name = lastName + ", " + firstName;
-
-				// Person
-				g.writeStartArray();
-				g.writeString(name);
-				g.writeString(contactInfoStatus);
-				g.writeEndArray();
-			}
-			// Array of people
-			g.writeEndArray();
-			// Wrapper object
-			g.writeEndObject();
-			g.close();
+			json = csvToJson(in);
 		}
 		catch (IOException ioe)
 		{
-			json.write("{ error: 'Failed to retrieve most wanted list'}");
+			json = "{ error: 'Failed to retrieve most wanted list'}";
 		}
+
+		return json;
+	}
+
+	String csvToJson(InputStreamReader in) throws IOException {
+
+		StringWriter json = new StringWriter();
+		CSVReader reader = new CSVReader(in);
+		JsonGenerator g = (new JsonFactory()).createJsonGenerator(json);
+		int i = 0;
+
+		// Get headers
+		String [] nextLine = reader.readNext();
+		ArrayList headers = new ArrayList();
+		for (i = 0; i < nextLine.length; i++)
+		{
+			headers.add(nextLine[i]);
+		}
+
+		// Wrapper object
+		g.writeStartObject();
+
+		// Array of objects
+		g.writeArrayFieldStart("data");
+
+		while ((nextLine = reader.readNext()) != null) {
+			// nextLine[] is an array of values from the line
+
+			g.writeStartObject();
+			for (i = 0; i < nextLine.length; i++)
+			{
+				g.writeStringField((String)headers.get(i), nextLine[i]);
+			}
+			g.writeEndObject();
+		}
+		g.writeEndArray();
+		// Wrapper object
+		g.writeEndObject();
+		g.close();
 
 		return json.toString();
 	}
