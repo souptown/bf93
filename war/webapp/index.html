@@ -73,6 +73,23 @@
 		</footer>
 	</div>
 
+	<div id="missingPersonModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="missingPersonFormLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="missingPersonFormLabel"><span class="missingPersonName"></span></h3>
+		</div>
+		<div class="modal-body">
+			Enter any information you have to help find our classmate:
+			<p><textarea rows="5" style="width: 515px;"></textarea></p>
+			Type the two words:
+			<p id="recap"></p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button class="btn btn-primary submitMissing">Submit</button>
+		</div>
+	</div>
+
 	<!-- Google analytics -->
 	<script type="text/javascript">
 
@@ -257,6 +274,16 @@
 	<!-- Missing classmates template -->
 	<script id="missingTemplate" type="text/x-handlebars-template">
 		<div class="span12">
+
+			<div class="row missingMessageContainer">
+				<div class="span12">
+					<div class="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<div>Thank you for your help finding our classmate!</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="span12">
 					<h1>Missing Classmates</h1>
@@ -276,7 +303,7 @@
 	<!-- Missing Classmates template -->
 	<script id="missingClassmateTemplate" type="text/x-handlebars-template">
 		{{#each data}}
-		<li>{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}, {{firstName}}</li>
+		<li><a href="javascript:void(0)">{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}, {{firstName}}</a></li>
 		{{/each}}
 	</script>
 

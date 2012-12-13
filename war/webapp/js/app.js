@@ -4,7 +4,8 @@
  */
 /*jslint bitwise:true, browser:true, nomen:true, regexp:true, sloppy:true, white:true */
 
-/** The following comment is to prevent jslint errors about 
+/**
+ * The following comment is to prevent jslint errors about
  * using variables before they are defined.
  */
 /*global define, require */
@@ -17,10 +18,9 @@ define(
 		"backbone",
 		"handlebars",
 		"bootstrap",
-		"datatables",
-		"datatables.bootstrap"
+		"recaptcha"
 	],
-	function($, _, Backbone, Handlebars, datatables) {
+	function($, _, Backbone, Handlebars) {
 
 		var AppUrlRouter = Backbone.Router.extend({
 			routes: {
@@ -39,11 +39,6 @@ define(
 		 * @return {undefined}
 		 */
 		initialize = function () {
-
-			// Set bootstrap sort classes for jquery datatables
-			$.extend( $.fn.dataTableExt.oStdClasses, {
-				"sWrapper": "dataTables_wrapper form-inline"
-			} );
 
 			// Define what happens when local history mdifications are made (navigate to hashtag in url)
 			appUrlRouter = new AppUrlRouter;
@@ -258,13 +253,16 @@ define(
 			actionKey: "missing", // Default
 			template: null,
 			missingClassmateTemplate: null,
-			initialized: false,
 			initialize: function() {
 				// Load template
 				this.template = Handlebars.compile($("#missingTemplate").html());
 				this.missingClassmateTemplate = Handlebars.compile($("#missingClassmateTemplate").html());
 				// Listen for model changes
 				this.model.on("change:currentActions", this.render, this);
+				// Listen for person clicks
+				this.$el.on("click", "a", { view: this }, this.handleMissingPersonClick);
+				// Listen for submit clicks
+				$(document.body).on("click", ".submitMissing", { view: this }, this.handleSubmitMissingPersonInfoClick);
 			},
 			render: function() {
 				var currentActions = this.model.get("currentActions"),
@@ -290,6 +288,72 @@ define(
 					// Hide the view
 					this.$el.css("display", "none");
 				}
+			},
+			handleMissingPersonClick: function (e) {
+				var $missingPersonModal = $("#missingPersonModal"),
+					missingView = e.data.view;
+
+				missingView.clickedName = $(this).text();
+
+				$missingPersonModal.find(".missingPersonName").html($(this).text());
+				$missingPersonModal.find("textarea").val("");
+				$missingPersonModal.modal();
+				if (missingView.recaptcha)
+				{
+					Recaptcha.reload();
+				}
+				else
+				{
+					Recaptcha.create("6LcIONoSAAAAAK4Biiojlhwrm0o6ARxW65T_009z", "recap", { theme: "clean" });
+					missingView.recaptcha = true;
+				}
+			},
+			handleSubmitMissingPersonInfoClick: function (e) {
+				var missingView = e.data.view,
+					name = missingView.clickedName,
+					info = $("#missingPersonModal").find("textarea").val(),
+					challenge = $("#recaptcha_challenge_field").val(),
+					userResponse = $("#recaptcha_response_field").val();
+
+				$("#missingPersonModal").find("button").attr("disabled", "disabled");
+				$("#missingPersonModal").find(".submitMissing").html("Submitting...");
+
+				$.getJSON("../api/classmates/missingInfo?name=" + encodeURIComponent(name) + "&info=" + encodeURIComponent(info) + "&challenge=" + encodeURIComponent(challenge) + "&userResponse=" + encodeURIComponent(userResponse), null,
+					function (data) {
+						$("#missingPersonModal").find("button").removeAttr("disabled");
+						$("#missingPersonModal").find(".submitMissing").html("Submit");
+						if (typeof(data.error) === "string")
+						{
+							alert(data.error);
+						}
+						else
+						{
+							if (!data.recaptcha)
+							{
+								$("#recaptcha_reload").popover({
+									title: "Words didn't match",
+									content: "Click here to get new words if you can't read the current ones.",
+									trigger: "manual"
+								});
+								$("#recaptcha_reload").popover("show");
+								$(document.body).on("click", null, { view: missingView }, missingView.hidePopover);
+							}
+							else if (!data.emailed)
+							{
+								alert("There was a problem submitting the information. Please try again later, or use the Contact page to email the reunion committee.");
+							}
+							else
+							{
+								$("#missingPersonModal").modal("hide");
+								alert("Thanks!");
+							}
+						}
+					});
+			},
+			hidePopover: function (e) {
+				var missingView = e.data.view;
+				$("#recaptcha_reload").popover("hide");
+				$(document.body).off("click", missingView.hidePopover);
 			}
 		}),
 

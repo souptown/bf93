@@ -4,7 +4,8 @@
  */
 /*jslint bitwise:true, browser:true, nomen:true, regexp:true, sloppy:true, white:true */
 
-/** The following comment is to prevent jslint errors about 
+/**
+ * The following comment is to prevent jslint errors about
  * using variables before they are defined.
  */
 /*global define, require */
@@ -19,7 +20,8 @@ require.config(
         "handlebars": "//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta6/handlebars.min",
         "bootstrap": "//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/js/bootstrap.min",
         "datatables": "../3rdparty/jquery.dataTables/1.9.4/jquery.dataTables.min",
-        "datatables.bootstrap": "../3rdparty/jquery.dataTables/bootstrappaging"
+        "datatables.bootstrap": "../3rdparty/jquery.dataTables/bootstrappaging",
+        "recaptcha": "//www.google.com/recaptcha/api/js/recaptcha_ajax"
     },
 
     shim: {
@@ -44,6 +46,9 @@ require.config(
       },
       "datatables.bootstrap": {
         deps: ["datatables"]
+      },
+      recaptcha: {
+        exports: "Recaptcha"
       }
     },
 
