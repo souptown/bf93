@@ -364,16 +364,16 @@ define(
 		missingView = new MissingView({ el: $("#missingContainer"), model: viewModel }),
 
 		/**
-		 * Defines a class that handles the memories view
+		 * Defines a class that handles the yearbook view
 		 * @type {Backbone.View}
 		 */
-		MemoriesView = Backbone.View.extend({
-			actionKey: "memories", // Default
+		YearbookView = Backbone.View.extend({
+			actionKey: "yearbook", // Default
 			template: null,
 			initialized: false,
 			initialize: function() {
 				// Load template
-				this.template = Handlebars.compile($("#memoriesTemplate").html());
+				this.template = Handlebars.compile($("#yearbookTemplate").html());
 				// Listen for model changes
 				this.model.on("change:currentActions", this.render, this);
 			},
@@ -401,10 +401,10 @@ define(
 		}),
 
 		/**
-		 * Instance of memoriesView class for handling the most wanted view
-		 * @type {MemoriesView}
+		 * Instance of yearbookView class for handling the most wanted view
+		 * @type {YearbookView}
 		 */
-		memoriesView = new MemoriesView({ el: $("#memoriesContainer"), model: viewModel }),
+		yearbookView = new YearbookView({ el: $("#yearbookContainer"), model: viewModel }),
 
 		/**
 		 * Defines a class that handles the contact view
