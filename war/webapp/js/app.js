@@ -126,6 +126,80 @@ define(
 		welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel }),
 
 		/**
+		 * Defines a class that handles the golf view
+		 * @type {Backbone.View}
+		 */
+		GolfView = Backbone.View.extend({
+			actionKey: "golf", // Default
+			template: null,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#golfTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of GolfView class for handling the golf view
+		 * @type {WelcomeView}
+		 */
+		golfView = new GolfView({ el: $("#golfContainer"), model: viewModel }),
+
+		/**
+		 * Defines a class that handles the scholarship view
+		 * @type {Backbone.View}
+		 */
+		ScholarshipView = Backbone.View.extend({
+			actionKey: "scholarship", // Default
+			template: null,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#scholarshipTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (currentActions === this.actionKey)
+				{
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of ScholarshipView class for handling the golf view
+		 * @type {WelcomeView}
+		 */
+		scholarshipView = new ScholarshipView({ el: $("#scholarshipContainer"), model: viewModel }),
+
+		/**
 		 * Defines a class that handles the Registration view
 		 * @type {Backbone.View}
 		 */
