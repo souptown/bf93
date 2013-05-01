@@ -52,6 +52,7 @@
 					<li><a href="#missing">Missing Classmates</a></li>
 					<li><a href="#golf">Golf</a></li>
 					<li><a href="#scholarship">Scholarship</a></li>
+					<li><a href="#tshirt">T-shirt</a></li>
 					<li><a href="#yearbook">Yearbook</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
@@ -67,6 +68,7 @@
 	<div id="missingContainer" class="container" style="display: none;">Missing Classmates</div>
 	<div id="golfContainer" class="container" style="display: none;">Golf</div>
 	<div id="scholarshipContainer" class="container" style="display: none;">Scholarship</div>
+	<div id="tshirtContainer" class="container" style="display: none;">T-shirt</div>
 	<div id="yearbookContainer" class="container" style="display: none;">Yearbook</div>
 	<div id="contactContainer" class="container" style="display: none;">Contact</div>
 	
@@ -139,7 +141,7 @@
 					</ul>
 				</p>
 				<h4>Saturday — Golf Tournament</h4>
-				<p>Nemadji Golf Course - Competitive and “just for fun” brackets with prizes! 10AM shotgun start.</p>
+				<p><a href="#golf" title="Golf Tournament">Nemadji Golf Course</a> - Competitive and “just for fun” brackets with prizes! 10AM shotgun start.</p>
 				<h4>Saturday – Choose Your Own Adventure</h4>
 					<ul>
 						<li><a href="http://www.superiorchamber.org" title="Superior-Douglas County Chamber of Commerce">Superior-Douglas County Chamber of Commerce</a></li>
@@ -167,11 +169,59 @@
 					<li><a href="http://www.nemadjigolf.com" title="Saturday - golf tournament">Nemadji Golf Course</a></li>
 					<li><a href="http://www.flickr.com/photos/uw-superior/4626894776/in/photostream/" title="Saturday night - main event">Yellowjacket Union</a></li>
 				</ul>
+				<h2>T-shirt!!!</h2>
+				<p>Get your <a href="#tshirt" title="Reunion t-shirt">reunion t-shirt</a>!</p>
 			</div>
 		</div>
 		<div class="row">
 		</div>
 
+
+	</script>
+
+	<!-- T-shirt template -->
+	<script id="tshirtTemplate" type="text/x-handlebars-template">
+		<div class="span12">
+
+			<div class="row paypalMessageContainer">
+				<div class="span12">
+					<div class="alert">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<div class="paypalMessage">paypal message</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="span8">
+					<h1>T-shirt</h1>
+					<p>Cost: $20</p>
+					<p>Delivery: All purchased t-shirts will be handed out at the reunion</p>
+
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="3CZQHWXNVHPMA">
+					<table>
+					<tr><td><input type="hidden" name="on0" value="Sizes">Sizes</td></tr><tr><td><select name="os0">
+						<option value="Small">Small </option>
+						<option value="Medium">Medium </option>
+						<option value="Large">Large </option>
+						<option value="X-Large">X-Large </option>
+					</select> </td></tr>
+					</table>
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
+
+				<div class="span8">
+					<img src="images/tshirt-sample.jpg" alt="T-shirt design"/>
+				</div>
+
+			</div>
+
+		</div>
 
 	</script>
 
@@ -194,8 +244,8 @@
 					<h1>Registration</h1>
 					<p>Registration fee:
 						<ul>
-							<li>$40 per person prior to March 1, 2013</li>
-							<li>$50 per person starting March 1, 2013</li>
+							<li>$40 per person prior to May 15, 2013</li>
+							<li>$50 per person starting May 15, 2013</li>
 							<li>$60 per person at the door</li>
 					</p>
 
@@ -332,7 +382,7 @@
 		</tr>
 		<tr>
 			<td style="font-weight: bold;">Cost:</td>
-			<td>$15 per person (includes riding cart)</td>
+			<td>$20 per person (includes riding cart)</td>
 		</tr>
 	</tbody>
 </table>

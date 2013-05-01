@@ -200,6 +200,53 @@ define(
 		scholarshipView = new ScholarshipView({ el: $("#scholarshipContainer"), model: viewModel }),
 
 		/**
+		 * Defines a class that handles the T-shirt view
+		 * @type {Backbone.View}
+		 */
+		TshirtView = Backbone.View.extend({
+			actionKeys: {
+				"tshirt": true,
+				"tshirtcancel": { "message": "<p>T-shirt purchase payment was canceled. No payment has been made.</p>" },
+				"tshirtsuccess": { "message": "<p>Thank you for buying a t-shirt! Your transaction has been completed, and a receipt for your purchase has been emailed to you. You may log into your account at <a href=\"http://www.paypal.com/us\" title=\"Paypal Website\" target=\"_blank\">http://www.paypal.com/us</a> to view details of this transaction. We will have your t-shirt for you at the reunion!</p>" }
+			},
+			template: null,
+			initialize: function() {
+				// Load template
+				this.template = Handlebars.compile($("#tshirtTemplate").html());
+				// Listen for model changes
+				this.model.on("change:currentActions", this.render, this);
+			},
+			render: function() {
+				var currentActions = this.model.get("currentActions");
+				if (typeof(this.actionKeys[currentActions]) !== "undefined")
+				{
+					// Load the compiled HTML into the Backbone "el"
+					this.$el.html( this.template({}) );
+
+					if (currentActions === "tshirtcancel" || currentActions === "tshirtsuccess")
+					{
+						this.$el.find(".paypalMessageContainer").css("display", "block");
+						this.$el.find(".paypalMessage").html(this.actionKeys[currentActions].message);
+					}
+
+					// Show the view
+					this.$el.css("display", "");
+				}
+				else
+				{
+					// Hide the view
+					this.$el.css("display", "none");
+				}
+			}
+		}),
+
+		/**
+		 * Instance of TshirtView class for handling the tshirt view
+		 * @type {RegistrationView}
+		 */
+		tshirtView = new TshirtView({ el: $("#tshirtContainer"), model: viewModel }),
+
+		/**
 		 * Defines a class that handles the Registration view
 		 * @type {Backbone.View}
 		 */
