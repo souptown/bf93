@@ -326,7 +326,9 @@
 	<!-- Registered Attendees template -->
 	<script id="registeredAttendeesTemplate" type="text/x-handlebars-template">
 		{{#each data}}
-		<li>{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}{{#if firstName}}, {{firstName}}{{/if}}</li>
+		  	{{#if lastName}}
+				<li>{{lastName}}{{#if maidenName}} ({{maidenName}}){{/if}}{{#if firstName}}, {{firstName}}{{/if}}</li>
+			{{/if}}
 		{{/each}}
 	</script>
 
