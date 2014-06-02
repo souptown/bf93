@@ -1,17 +1,32 @@
 
 # Compiled files
-*.class
+#*.class
 
 # App Egine SDK jars
-appengine-*.jar
-datanucleus-*.jar
-geronimo-*.jar
-jdo2-*.jar
-jsr*cache-*.jar
+#appengine-*.jar
+#datanucleus-*.jar
+#geronimo-*.jar
+#jdo2-*.jar
+#jsr*cache-*.jar
 
 #App Engine Generated
-datastore-indexes-auto.xml
+#datastore-indexes-auto.xml
 
-notes.txt
-classmates.csv
-0d2c51b347462c04623b2970640eae5b7f0f88ac-privatekey.p12
+#notes.txt
+#classmates.csv
+#0d2c51b347462c04623b2970640eae5b7f0f88ac-privatekey.p12
+
+# From maven "generate"
+target/
+build/
+.gradle
+datanucleus.log
+.DS_Store
+out
+*.iml
+*.ipr
+*.iws
+.idea
+.settings
+.classpath
+.project
