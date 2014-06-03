@@ -130,7 +130,13 @@ define(
 		 * @type {Backbone.View}
 		 */
 		GolfView = Backbone.View.extend({
-			actionKey: "golf", // Default
+			actionKeys: {
+				"golf": true, // Default
+				"golfcancel": { "message": "<p>Golf payment was canceled.</p>"},
+				"golfsuccess": { "message": "<p>Thanks for registering for the tournament! Your payment has been processed, and a receipt for your purchase has been emailed to you.</p>\n" + 
+					"<p><strong>IF YOU DID NOT GIVE US YOUR NAME</strong>, then you will need to provide proof of payment when you come to the reunion. A print-out of your Paypal confirmation email will work for this.</p>"
+				}
+			},
 			template: null,
 			initialize: function() {
 				// Load template
@@ -140,10 +146,16 @@ define(
 			},
 			render: function() {
 				var currentActions = this.model.get("currentActions");
-				if (currentActions === this.actionKey)
+				if (typeof(this.actionKeys[currentActions]) !== "undefined")
 				{
 					// Load the compiled HTML into the Backbone "el"
 					this.$el.html( this.template({}) );
+
+					if (currentActions === "golfcancel" || currentActions === "golfsuccess")
+					{
+						this.$el.find(".golfMessageContainer").css("display", "block");
+						this.$el.find(".golfMessage").html(this.actionKeys[currentActions].message);
+					}
 
 					// Show the view
 					this.$el.css("display", "");
@@ -153,7 +165,11 @@ define(
 					// Hide the view
 					this.$el.css("display", "none");
 				}
+			},
+			handleGolfRegisterSubmitClick: function (e) {
+				$("#golfForm").submit();
 			}
+
 		}),
 
 		/**

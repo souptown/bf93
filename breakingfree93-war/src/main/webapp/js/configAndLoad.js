@@ -14,13 +14,11 @@ require.config(
   {
     //baseUrl: "/another/path",
     paths: {
-        "jquery": "//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min",
+        "jquery": "//code.jquery.com/jquery-1.11.0.min",
         "underscore": "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min",
         "backbone": "//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min",
         "handlebars": "//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta6/handlebars.min",
-        "bootstrap": "//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/js/bootstrap.min",
-        "datatables": "../3rdparty/jquery.dataTables/1.9.4/jquery.dataTables.min",
-        "datatables.bootstrap": "../3rdparty/jquery.dataTables/bootstrappaging",
+        "bootstrap": "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min",
         "recaptcha": "//www.google.com/recaptcha/api/js/recaptcha_ajax"
     },
 
@@ -40,12 +38,6 @@ require.config(
       },
       bootstrap: {
         deps: ["jquery"]
-      },
-      datatables: {
-        deps: ["jquery"]
-      },
-      "datatables.bootstrap": {
-        deps: ["datatables"]
       },
       recaptcha: {
         exports: "Recaptcha"
