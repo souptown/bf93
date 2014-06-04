@@ -133,9 +133,7 @@ define(
 			actionKeys: {
 				"golf": true, // Default
 				"golfcancel": { "message": "<p>Golf payment was canceled.</p>"},
-				"golfsuccess": { "message": "<p>Thanks for registering for the tournament! Your payment has been processed, and a receipt for your purchase has been emailed to you.</p>\n" + 
-					"<p><strong>IF YOU DID NOT GIVE US YOUR NAME</strong>, then you will need to provide proof of payment when you come to the reunion. A print-out of your Paypal confirmation email will work for this.</p>"
-				}
+				"golfsuccess": { "message": "<p>Thanks for registering for the tournament! Your payment has been processed, and a receipt for your purchase has been emailed to you.</p>"}
 			},
 			template: null,
 			initialize: function() {
