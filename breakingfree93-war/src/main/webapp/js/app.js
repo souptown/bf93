@@ -165,9 +165,6 @@ define(
 					// Hide the view
 					this.$el.css("display", "none");
 				}
-			},
-			handleGolfRegisterSubmitClick: function (e) {
-				$("#golfForm").submit();
 			}
 
 		}),
