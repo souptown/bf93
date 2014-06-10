@@ -46,6 +46,8 @@ define(
 				viewModel.set("currentActions", actions);
 			});
 			Backbone.history.start();
+
+			$("#robotHeader").css("display", "none");
 			
 		},
 
