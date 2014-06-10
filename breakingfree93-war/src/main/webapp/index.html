@@ -43,13 +43,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav">
-		<li><a href="#">Home</a></li>
+		<!-- <li><a href="#">Home</a></li> -->
 <!-- 	<li><a href="#registration">Registration</a></li>
 		<li><a href="#registered">Registered Attendees</a></li>
 		<li><a href="#missing">Missing Classmates</a></li>
 -->		<li><a href="#golf">Golf</a></li>
 		<li><a href="#scholarship">Scholarship</a></li>
-		<li><a href="#tshirt">T-shirt</a></li>
+		<!-- <li><a href="#tshirt">T-shirt</a></li> -->
 		<li><a href="#yearbook">Yearbook</a></li>
 		<li><a href="#contact">Contact</a></li>
      </ul>
@@ -89,6 +89,24 @@
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 			<button class="btn btn-primary submitMissing">Submit</button>
+		</div>
+	</div>
+
+	<div class="modal fade" id="donate" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="donateModalLabel">Donate to scholarship</h4>
+				</div>
+				<div class="modal-body">
+					<p>Please select "Class of 1993 Scholarship" from the "Fund" drop down on the donation page.</p>
+					<img src="images/fund.png"/>
+				</div>
+				<div class="modal-footer">
+					<a href="http://superior-scholarship-foundation.superior.schoolfusion.us/modules/groups/group_pages.phtml?gid=2345435&nid=428515" title="Go to donation page" class="btn btn-success btn-primary">Take me to the donation page!</a>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -397,15 +415,25 @@
 			</div>
 		</div>
 
-		<h1>SSHS Class of 1993 Scholarship Fundraiser<br/>Golf Tournament</h1>
-		<h3 style="margin-top: 1em;">Poplar Golf Course<br/>
-		Saturday, July 12th, 2014</h3>
+		<div class="jumbotron fullNameWelcome">
+			<img class="welcome-logo" src="images/SpartanLogo.png"/>
+			<h1 class="fullNameWelcome">Superior Senior High class of 1993</h1>
+			<div style="clear:both;"></div>
+		</div>
+
+		<h1>Scholarship Fundraiser Golf Tournament</h1>
+		<h2>Saturday, July 12th, 2014</h2>
 		<div class="row">
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<table>
 							<tbody>
+								<tr>
+									<td valign="top"  style="font-weight: bold;">Where:</td>
+									<td><a href="http://www.poplargolf.com" title="Poplar Golf Course">Poplar Golf Course</a><br/>
+									<a href="https://www.google.com/maps/dir/Superior,+WI/Golf+Course+Rd,+Poplar,+WI+54864/@46.6540341,-92.0206918,12z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x52ae5107bcc388b9:0x5af84c6953c25e09!2m2!1d-92.1040796!2d46.7207737!1m5!1m1!1s0x52aef1a4207c3307:0xc0469fc91391374c!2m2!1d-91.8042826!2d46.604577" title="Map to Poplar Golf Course">map</a></td>
+								</tr>
 								<tr>
 									<td valign="top"  style="font-weight: bold;">Format:</td>
 									<td>9 hole four (4) to six (6) person modified scramble</td>
@@ -432,11 +460,6 @@
 									</ul>
 									Golf carts are $12, and they are not included.</td>
 								</tr>
-								<tr>
-									<td colspan="2"style="font-weight: bold;">
-										<div style="font-weight: normal; margin: .5em;">Don’t have a team? Sign up anyway, and teams will be made up at the event!</div>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -444,7 +467,7 @@
 
 			</div>
 
-			<div class="col-md-4" style="margin-bottom: 1em;">
+			<div class="col-md-2" style="margin-bottom: 1em;">
 				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="golfForm">
 					<input type="hidden" name="cmd" value="_s-xclick">
 					<input type="hidden" name="hosted_button_id" value="U6JXZU7PEHMBW">
@@ -454,6 +477,11 @@
 					</button>
 				</form>
 			</div>
+			<div class="col-md-2" style="margin-bottom: 1em;">
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#donate">
+					Donate
+				</button>
+			</div>
 
 		</div>
 
@@ -461,9 +489,15 @@
 			<div class="col-md-12">
 				<ul class="list-group">
 					<li class="list-group-item">
-						<h4>I don't golf!</h4>
+						<h4>What if I don&apos;t have a team?</h4>
+						<p>Sign up anyway, and teams will be made up at the event!
+						</p>
+					</li>
+					<li class="list-group-item">
+						<h4>What if I don&apos;t golf?</h4>
 						<p>Each team will have a choice of "games" to play. One will be straight up golf for the hard core enthusiasts, and the other will be full of wacky &mdash; yes, wacky &mdash; fun.
 						</p>
+						<p>Dedicated non-golfers can show their generosity and class pride by using the "Donate" button above to give directly to the scholarship fund.</p>
 					</li>
 					<li class="list-group-item">
 						<h4>Who can play?</h4>
@@ -507,7 +541,11 @@
 					</li>
 					<li class="list-group-item">
 						<h4>Can I make a payment online?</h4>
-						<p>Yes!  The <a href="http://superior-scholarship-foundation.superior.schoolfusion.us/modules/groups/group_pages.phtml?gid=2345435&nid=428515" title="Superior Scholarship Foundation, Inc.">Superior Scholarship Foundation has a website</a> where you can make a donation by credit card. Please select "Class of 1993 Scholarship" from the Fund drop down.</p>
+						<p>Yes!  The <a href="#"  data-toggle="modal" data-target="#donate" title="Superior Scholarship Foundation, Inc.">Superior Scholarship Foundation has a website</a> where you can make a donation by credit card.<br/>
+							<button class="btn btn-primary btn-success" data-toggle="modal" data-target="#donate">
+								Donate
+							</button>
+						</p>
 					</li>
 					<li class="list-group-item">
 						<h4>How much do we need to create an endowment scholarship that awards $500 yearly?</h4>
@@ -541,12 +579,11 @@
 
 	<!-- Yearbook template -->
 	<script id="yearbookTemplate" type="text/x-handlebars-template">
+		<div class="jumbotron fullNameWelcome">
+			<h1>Class of 1993</h1>
+			<div style="clear:both;"></div>
+		</div>
 		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Yearbook</h1>
-				</div>
-			</div>
 <div class="yearbook">
 <div class="col-md-1"><img class="yearbook" src="http://i.imgur.com/pjFrH.jpg"/>Donnie Albright</div>
 <div class="col-md-1"><img class="yearbook" src="http://i.imgur.com/UTACz.jpg"/>Sara Allen</div>
@@ -850,17 +887,21 @@
 
 	<!-- Contact template -->
 	<script id="contactTemplate" type="text/x-handlebars-template">
+		<div class="jumbotron fullNameWelcome">
+			<h1>Contact</h1>
+			<div style="clear:both;"></div>
+		</div>
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-6">
 					<h1>Email</h1>
 					<p>Send an email to the reunion committee.</p>
-					<p><a class="btn" href="http://www.google.com/recaptcha/mailhide/d?k=01RJ5oJga0wozLa8T0RBIjcQ==&c=BTWUEjd-sGbwdI7x7B0e4oB-uCemNaBiRdLWw5t26oI=" title="Reunion committee email" target="_blank">Go &raquo;</a></p>
+					<p><a class="btn btn-primary btn-lg" href="http://www.google.com/recaptcha/mailhide/d?k=01RJ5oJga0wozLa8T0RBIjcQ==&c=BTWUEjd-sGbwdI7x7B0e4oB-uCemNaBiRdLWw5t26oI=" title="Reunion committee email" target="_blank">Get email address</a></p>
 				</div>
 				<div class="col-md-6">
 					<h2>Visit our Facebook page</h2>
 					<p>Check out the SSHS Class of 1993 Facebook group for discussions and news.</p>
-					<p><a class="btn" href="https://www.facebook.com/groups/397316073640135/?fref=ts">Go &raquo;</a></p>
+					<p><a class="btn btn-primary btn-lg" href="https://www.facebook.com/groups/397316073640135/?fref=ts">Go to Facebook</a></p>
 				</div>
 			</div>
 		</div>

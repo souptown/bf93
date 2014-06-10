@@ -88,42 +88,42 @@ define(
 		 */
 		pageLoadingView = new PageLoadingView({ model: viewModel }),
 
-		/**
-		 * Defines a class that handles the welcome view
-		 * @type {Backbone.View}
-		 */
-		WelcomeView = Backbone.View.extend({
-			actionKey: "", // Default
-			template: null,
-			initialize: function() {
-				// Load template
-				this.template = Handlebars.compile($("#welcomeTemplate").html());
-				// Listen for model changes
-				this.model.on("change:currentActions", this.render, this);
-			},
-			render: function() {
-				var currentActions = this.model.get("currentActions");
-				if (currentActions === this.actionKey)
-				{
-					// Load the compiled HTML into the Backbone "el"
-					this.$el.html( this.template({}) );
+		// /**
+		//  * Defines a class that handles the welcome view
+		//  * @type {Backbone.View}
+		//  */
+		// WelcomeView = Backbone.View.extend({
+		// 	actionKey: "", // Default
+		// 	template: null,
+		// 	initialize: function() {
+		// 		// Load template
+		// 		this.template = Handlebars.compile($("#welcomeTemplate").html());
+		// 		// Listen for model changes
+		// 		this.model.on("change:currentActions", this.render, this);
+		// 	},
+		// 	render: function() {
+		// 		var currentActions = this.model.get("currentActions");
+		// 		if (currentActions === this.actionKey)
+		// 		{
+		// 			// Load the compiled HTML into the Backbone "el"
+		// 			this.$el.html( this.template({}) );
 
-					// Show the view
-					this.$el.css("display", "");
-				}
-				else
-				{
-					// Hide the view
-					this.$el.css("display", "none");
-				}
-			}
-		}),
+		// 			// Show the view
+		// 			this.$el.css("display", "");
+		// 		}
+		// 		else
+		// 		{
+		// 			// Hide the view
+		// 			this.$el.css("display", "none");
+		// 		}
+		// 	}
+		// }),
 
-		/**
-		 * Instance of WelcomeView class for handling the welcome view
-		 * @type {WelcomeView}
-		 */
-		welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel }),
+		// /**
+		//  * Instance of WelcomeView class for handling the welcome view
+		//  * @type {WelcomeView}
+		//  */
+		// welcomeView = new WelcomeView({ el: $("#welcomeContainer"), model: viewModel }),
 
 		/**
 		 * Defines a class that handles the golf view
@@ -144,7 +144,7 @@ define(
 			},
 			render: function() {
 				var currentActions = this.model.get("currentActions");
-				if (typeof(this.actionKeys[currentActions]) !== "undefined")
+				if (currentActions === "" || typeof(this.actionKeys[currentActions]) !== "undefined")
 				{
 					// Load the compiled HTML into the Backbone "el"
 					this.$el.html( this.template({}) );
@@ -157,6 +157,8 @@ define(
 
 					// Show the view
 					this.$el.css("display", "");
+
+					window.scrollTo(0, 0);
 				}
 				else
 				{
@@ -195,6 +197,8 @@ define(
 
 					// Show the view
 					this.$el.css("display", "");
+
+					window.scrollTo(0, 0);
 				}
 				else
 				{
@@ -523,6 +527,8 @@ define(
 
 					// Show the view
 					this.$el.css("display", "");
+
+					window.scrollTo(0, 0);
 				}
 				else
 				{
@@ -566,6 +572,8 @@ define(
 
 					// Show the view
 					this.$el.css("display", "");
+
+					window.scrollTo(0, 0);
 				}
 				else
 				{
